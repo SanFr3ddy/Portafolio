@@ -27,7 +27,7 @@
             <nav>
                 <ul class="nav">
                     <li><a href="index.html">Acerca</a></li>
-                    <li><a href="SanFreddycontacto.html" class="active">Contacto</a></li>
+                    <li><a href="SanFreddycontacto.html" class="active">Trabajos</a></li>
                 </ul>
             </nav>
 
@@ -41,34 +41,57 @@
         </div>
 
 
-        <section class="contact page active">
-            <h1 class="section-heading">Contacto</h1>
-            <h4 class="section-sub-heading">Mensajes</h4>
+        <section class="trabajos page active">
+            <h1 class="section-heading">Trabajos</h1>
+            <h4 class="section-sub-heading">Seleccion de proyectos</h4>
 
-            <div class="contact-info">
-                <div class="info-box">
-                    <ion-icon name="call-outline"></ion-icon>
-                    <p>33-16-04-21-29</p>
-                </div>
+            <div class="trabajos-grid">
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Clase</h3>
+                        <span class="trabajo-tag">HTML</span>
+                    </div>
+                    <p>Ejemplo base para practica de estructura y estilos.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/Clase.html">
+                            Ver codigo
+                        </button>
+                        <a class="btn-primary trabajo-demo-link" href="Trabajos/Clase.html" target="_blank" rel="noopener">
+                            Abrir demo
+                        </a>
+                    </div>
+                </article>
 
-                <div class="info-box">
-                    <ion-icon name="location-outline"></ion-icon>
-                    <p>Guadalajara Jalisco</p>
-                </div>
-
-                <div class="info-box">
-                    <ion-icon name="mail-outline"></ion-icon>
-                    <p>santosgutierrezalfredo@gmail.com</p>
-                </div>
-
-                <div class="info-box">
-                    <ion-icon name="checkmark-outline"></ion-icon>
-                    <p>disponible</p>
-                </div>
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Cubo Three.js</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Escena 3D con cubo, ejes y rotacion interactiva.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/threejs-cube-example.html">
+                            Ver codigo
+                        </button>
+                        <a class="btn-primary trabajo-demo-link" href="Trabajos/threejs-cube-example.html" target="_blank" rel="noopener">
+                            Abrir demo
+                        </a>
+                    </div>
+                </article>
             </div>
-
-            
         </section>
+
+        <div class="code-modal" aria-hidden="true">
+            <div class="code-modal-backdrop" data-code-close></div>
+            <div class="code-modal-content" role="dialog" aria-modal="true" aria-labelledby="code-modal-title">
+                <div class="code-modal-header">
+                    <h3 id="code-modal-title">Codigo HTML</h3>
+                    <button class="code-modal-close" type="button" data-code-close aria-label="Cerrar">
+                        x
+                    </button>
+                </div>
+                <pre class="code-modal-body"><code id="code-modal-code"></code></pre>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
