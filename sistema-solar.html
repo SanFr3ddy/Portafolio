@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulación Sistema Solar - Three.js</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #000; }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        #pauseBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            padding: 8px 16px;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">Simulación interactiva del Sistema Solar (Three.js)</div>
+    <button id="pauseBtn">Pausar</button>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.155.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="sistema-solar.js">
+        
+    </script>
+
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setClearColor(0x000000);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.domElement.style.position = 'fixed';
+        renderer.domElement.style.top = 0;
+        renderer.domElement.style.left = 0;
+        renderer.domElement.style.width = '100vw';
+        renderer.domElement.style.height = '100vh';
+        document.body.appendChild(renderer.domElement);
+
+        // Fondo estelar
+        const loader = new THREE.TextureLoader();
+        loader.load('https://raw.githubusercontent.com/MarcosPividori/threejs-planets-textures/main/2k_stars_milky_way.jpg', function(texture) {
+            scene.background = texture;
+        }, undefined, function() {
+            scene.background = new THREE.Color(0x000000);
+        });
+
+        // Sol
+        const sunTexture = loader.load('https://threejs.org/examples/textures/planets/sun.jpg');
+        const sunMaterial = new THREE.MeshStandardMaterial({ map: sunTexture, emissive: 0xffff00, emissiveIntensity: 1 });
+        sun = new THREE.Mesh(new THREE.SphereGeometry(3, 32, 32), sunMaterial);
+        scene.add(sun);
+
+        // Luz en el Sol
+        const light = new THREE.PointLight(0xffffff, 2, 200);
+        light.position.set(0, 0, 0);
+        scene.add(light);
+
+        // Planetas y órbitas
+        planetData.forEach((data, i) => {
+            // Grupo para la órbita
+            const orbitGroup = new THREE.Group();
+            scene.add(orbitGroup);
+            orbitGroups.push(orbitGroup);
+
+            // Planeta
+            const texture = loader.load(data.texture);
+            const material = new THREE.MeshStandardMaterial({ map: texture });
+            const geometry = new THREE.SphereGeometry(data.radius, 32, 32);
+            const planet = new THREE.Mesh(geometry, material);
+            planet.position.x = data.distance;
+            orbitGroup.add(planet);
+            planets.push(planet);
+
+            // Órbita visual
+            const orbitCurve = new THREE.EllipseCurve(0, 0, data.distance, data.distance);
+            const points = orbitCurve.getPoints(100);
+            const orbitGeometry = new THREE.BufferGeometry().setFromPoints(points.map(p => new THREE.Vector3(p.x, 0, p.y)));
+            const orbitLine = new THREE.Line(orbitGeometry, new THREE.LineBasicMaterial({ color: 0x888888 }));
+            scene.add(orbitLine);
+        });
+
+        // Controles de cámara
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Reloj
+        clock = new THREE.Clock();
+
+        // Pausa
+        document.getElementById('pauseBtn').onclick = () => {
+            paused = !paused;
+            document.getElementById('pauseBtn').textContent = paused ? 'Reanudar' : 'Pausar';
+        };
+
+        window.addEventListener('resize', onWindowResize, false);
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        if (!paused) {
+            const delta = clock.getDelta();
+            // Rotación y traslación de planetas
+            planetData.forEach((data, i) => {
+                // Rotación sobre eje
+                planets[i].rotation.y += data.rotation * delta * 10;
+                // Traslación orbital
+                orbitGroups[i].rotation.y += data.orbit * delta * 2;
+            });
+            // Rotación del Sol
+            sun.rotation.y += 0.01 * clock.getDelta();
+        }
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    </script>
+</body>
+</html>

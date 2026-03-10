@@ -11,7 +11,9 @@ const codeModal = document.querySelector('.code-modal');
 const codeModalCode = document.querySelector('#code-modal-code');
 const codeModalTitle = document.querySelector('#code-modal-title');
 const codeButtons = document.querySelectorAll('[data-code-file]');
+const demoButtons = document.querySelectorAll('[data-demo-file]');
 const codeCloseButtons = document.querySelectorAll('[data-code-close]');
+const codeModalBody = document.querySelector('#code-modal-body');
 
 
 menuToggler.addEventListener('click', function(){
@@ -60,18 +62,21 @@ for(let i = 0; i < filterBtn.length; i++){
     });
 }
 
+
 function openCodeModal(filePath, titleText){
-    if(!codeModal || !codeModalCode){
+    if(!codeModal || !codeModalBody || !codeModalCode){
         return;
     }
-
     codeModal.classList.add('is-open');
     codeModal.setAttribute('aria-hidden', 'false');
-    codeModalCode.textContent = 'Cargando...';
-
-    if(codeModalTitle){
-        codeModalTitle.textContent = titleText ? `Codigo HTML - ${titleText}` : 'Codigo HTML';
-    }
+    codeModalTitle.textContent = titleText ? `Código fuente - ${titleText}` : 'Código fuente';
+    codeModalBody.scrollTop = 0;
+    codeModalBody.style.padding = '0';
+    codeModalBody.style.background = '#181c20';
+    codeModalBody.style.minHeight = '40vh';
+    codeModalBody.style.display = 'block';
+    codeModalCode.style.display = 'block';
+    codeModalCode.innerHTML = 'Cargando...';
 
     fetch(filePath)
         .then(function(response){
@@ -81,11 +86,33 @@ function openCodeModal(filePath, titleText){
             return response.text();
         })
         .then(function(text){
-            codeModalCode.textContent = text;
+            codeModalCode.innerHTML = escapeHtml(text);
+            if(window.hljs) window.hljs.highlightElement(codeModalCode);
         })
         .catch(function(){
-            codeModalCode.textContent = 'No se pudo cargar el archivo.';
+            codeModalCode.innerHTML = `<span style='color:#f66'>No se pudo cargar el archivo.</span>`;
         });
+}
+
+function openDemoModal(demoPath, titleText){
+    if(!codeModal || !codeModalBody){
+        return;
+    }
+    codeModal.classList.add('is-open');
+    codeModal.setAttribute('aria-hidden', 'false');
+    codeModalTitle.textContent = titleText ? `Demo - ${titleText}` : 'Demo';
+    codeModalBody.innerHTML = `<iframe src="${demoPath}" style="width:100%;height:70vh;border:none;background:#222;"></iframe>`;
+}
+
+function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
 function closeCodeModal(){
@@ -96,15 +123,28 @@ function closeCodeModal(){
     codeModal.setAttribute('aria-hidden', 'true');
 }
 
+
 if(codeButtons.length){
     for(let i = 0; i < codeButtons.length; i++){
         codeButtons[i].addEventListener('click', function(){
             const filePath = this.getAttribute('data-code-file');
             const cardTitle = this.closest('.trabajo-card');
             const titleText = cardTitle ? cardTitle.querySelector('h3')?.textContent : '';
-
             if(filePath){
                 openCodeModal(filePath, titleText || '');
+            }
+        });
+    }
+}
+
+if(demoButtons.length){
+    for(let i = 0; i < demoButtons.length; i++){
+        demoButtons[i].addEventListener('click', function(){
+            const demoPath = this.getAttribute('data-demo-file');
+            const cardTitle = this.closest('.trabajo-card');
+            const titleText = cardTitle ? cardTitle.querySelector('h3')?.textContent : '';
+            if(demoPath){
+                openDemoModal(demoPath, titleText || '');
             }
         });
     }

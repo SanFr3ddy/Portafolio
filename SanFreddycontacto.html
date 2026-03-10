@@ -54,11 +54,11 @@
                     <p>Ejemplo base para practica de estructura y estilos.</p>
                     <div class="trabajo-actions">
                         <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/Clase.html">
-                            Ver codigo
+                            Ver código
                         </button>
-                        <a class="btn-primary trabajo-demo-link" href="Trabajos/Clase.html" target="_blank" rel="noopener">
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="Trabajos/Clase.html">
                             Abrir demo
-                        </a>
+                        </button>
                     </div>
                 </article>
 
@@ -70,9 +70,105 @@
                     <p>Escena 3D con cubo, ejes y rotacion interactiva.</p>
                     <div class="trabajo-actions">
                         <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/threejs-cube-example.html">
-                            Ver codigo
+                            Ver código
                         </button>
-                        <a class="btn-primary trabajo-demo-link" href="Trabajos/threejs-cube-example.html" target="_blank" rel="noopener">
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="Trabajos/threejs-cube-example.html">
+                            Abrir demo
+                        </button>
+                    </div>
+                </article>
+
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Animated Colors Cube</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Cubo 3D animado con colores cambiantes.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/animated-colors-cube.html">
+                            Ver código
+                        </button>
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="Trabajos/animated-colors-cube.html">
+                            Abrir demo
+                        </button>
+                    </div>
+                </article>
+
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Animated Cube</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Cubo 3D animado.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/animated-cube.html">
+                            Ver código
+                        </button>
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="Trabajos/animated-cube.html">
+                            Abrir demo
+                        </button>
+                    </div>
+                </article>
+
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Mosquito in Amber</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Modelo 3D de mosquito en ámbar.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/mosquito-in-amber.html">
+                            Ver código
+                        </button>
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="Trabajos/mosquito-in-amber.html">
+                            Abrir demo
+                        </button>
+                    </div>
+                </article>
+
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Playset Light Test</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Test de luces en escenario 3D.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Trabajos/playset-light-test.html">
+                            Ver código
+                        </button>
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="Trabajos/playset-light-test.html">
+                            Abrir demo
+                        </button>
+                    </div>
+                </article>
+
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Sistema Solar</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Simulación interactiva del Sistema Solar.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="sistema-solar.html">
+                            Ver código
+                        </button>
+                        <button class="btn-primary trabajo-demo-btn" type="button" data-demo-file="sistema-solar.html">
+                            Abrir demo
+                        </button>
+                    </div>
+                </article>
+
+                <article class="trabajo-card">
+                    <div class="trabajo-header">
+                        <h3>Simulador Ecosistema</h3>
+                        <span class="trabajo-tag">Three.js</span>
+                    </div>
+                    <p>Simulador de ecosistema base: terreno, vegetación, agua y rocas.<br>Modo primera persona.</p>
+                    <div class="trabajo-actions">
+                        <button class="btn-primary trabajo-code-btn" type="button" data-code-file="Jardin_proyecto/ecosistema.html">
+                            Ver código
+                        </button>
+                        <a class="btn-primary trabajo-demo-btn" href="Jardin_proyecto/ecosistema.html" target="_blank">
                             Abrir demo
                         </a>
                     </div>
@@ -89,11 +185,16 @@
                         x
                     </button>
                 </div>
-                <pre class="code-modal-body"><code id="code-modal-code"></code></pre>
+                <div class="code-modal-body" id="code-modal-body">
+                    <code id="code-modal-code"></code>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Highlight.js para resaltar sintaxis -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
