@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecosistema 3D - Proyecto</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div id="loading">Cargando ecosistema...</div>
+  <div id="sidebar">
+    <h3>Clima</h3>
+    <button onclick="setWeather('sunny')">Soleado</button>
+    <button onclick="setTsunamiMode()">Tsunami</button>
+    <button onclick="setWeather('rain')">Lluvia</button>
+    <button onclick="setWeather('winter')">Invierno</button>
+    <button onclick="setWeather('fire')">Incendio</button>
+
+    <div id="options-sunny" class="weather-options">
+      <h4>Soleado</h4>
+      <button onclick="setSunnyMode('normal')">Normal</button>
+      <button onclick="setSunnyMode('extreme')">Sol extremo</button>
+      <button onclick="setSunnyMode('wind')">Mucho viento</button>
+      <button onclick="setSunnyMode('windstrong')">Viento muy fuerte</button>
+
+      <h4>Dirección viento</h4>
+      <button onclick="setSunnyWindDirection('north')">Norte</button>
+      <button onclick="setSunnyWindDirection('south')">Sur</button>
+      <button onclick="setSunnyWindDirection('east')">Este</button>
+      <button onclick="setSunnyWindDirection('west')">Oeste</button>
+
+      <h4>Modo mundo</h4>
+      <button onclick="setWorldMode('normal')">Normal</button>
+      <button onclick="setWorldMode('beach')">Playa</button>
+      <button onclick="setSunnyMode('tsunami')">Tsunami</button>
+    </div>
+
+    <div id="options-rain" class="weather-options">
+      <h4>Opciones lluvia</h4>
+      <button onclick="setRainIntensity('normal')">Lluvia normal</button>
+      <button onclick="setRainIntensity('heavy')">Lluvia fuerte</button>
+      <button onclick="toggleLightning()">Rayos: ON/OFF</button>
+    </div>
+
+    <div id="options-winter" class="weather-options">
+      <h4>Invierno</h4>
+      <button onclick="setWinterMode('normal')">Nieve normal</button>
+      <button onclick="setWinterMode('storm')">Tormenta de nieve</button>
+      <button onclick="setWinterMode('avalanche')">Avalancha</button>
+    </div>
+
+    <div id="options-fire" class="weather-options">
+      <h4>Incendio</h4>
+      <button onclick="setFireMode('volcano')">Volcán (lava)</button>
+    </div>
+  </div>
+  <canvas id="scene-canvas" width="1280" height="800"></canvas>
+</body>
+</html>
